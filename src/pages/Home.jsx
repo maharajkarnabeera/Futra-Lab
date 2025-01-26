@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+
+  const navigate = useNavigate();
   return (
     <div>
        <main className="text-center py-20 bg-white">
@@ -8,7 +12,8 @@ function Home() {
         <p className="text-lg text-gray-600 mb-6">
           Discover the future with our innovative web solutions.
         </p>
-        <button className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800">
+        <button className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800"
+        onClick={() => navigate("/predict")}>
           Get Started
         </button>
       </main>
@@ -20,7 +25,8 @@ function Home() {
           <p className="text-gray-600 mb-4">
             Experience cutting-edge technology and exceptional service.
           </p>
-          <button className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition">
+          <button className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition"
+          onClick={() => navigate("/features")}>
             Learn More
           </button>
         </div>
@@ -29,7 +35,8 @@ function Home() {
           <p className="text-gray-300 mb-4">
             We are committed to delivering excellence and innovation.
           </p>
-          <button className="px-4 py-2 bg-teal-500 rounded hover:bg-teal-600 transition">
+          <button className="px-4 py-2 bg-teal-500 rounded hover:bg-teal-600 transition"
+           onClick={() => navigate("/about")}>
             Discover More
           </button>
         </div>
