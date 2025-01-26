@@ -11,20 +11,24 @@ import Features from "./pages/Features";
 
 function App() {
   return (
-      <>
-        <BrowserRouter>
+    <>
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen">
           <Header />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="about" element={<About />}></Route>
-            <Route path="contact" element={<Contact />}></Route>
-            <Route path="Features" element={<Features />}></Route>
-            <Route path="predict" element={<Predict />}></Route>
-            <Route path="*" element={<ErrorPage />}></Route>
-          </Routes>
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="about" element={<About />}></Route>
+              <Route path="contact" element={<Contact />}></Route>
+              <Route path="Features" element={<Features />}></Route>
+              <Route path="predict" element={<Predict />}></Route>
+              <Route path="*" element={<ErrorPage />}></Route>
+            </Routes>
+          </main>
           <Footer />
-        </BrowserRouter>
-      </>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
