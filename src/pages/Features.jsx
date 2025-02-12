@@ -1,19 +1,19 @@
 function Features() {
   const features = [
     {
-      title: "Advanced Analytics",
-      description: "Utilize cutting-edge analytics to gain insights into your data, helping you make informed decisions.",
-      image: "src/assets/advancedAnalytics.png", // Replace with actual image path
+      title: "Real-Time Energy & Emissions Forecasting",
+      description: "Leverage cutting-edge machine learning algorithms to predict vehicle energy consumption and emissions in real time. This feature provides actionable insights into fuel and electricity usage, empowering users to make informed decisions that optimize efficiency while reducing their environmental footprint.",
+      image: "src/assets/F1.png", // Replace with actual image path
     },
     {
-      title: "Real-time Collaboration",
-      description: "Collaborate with your team in real-time, ensuring everyone is on the same page and projects progress smoothly.",
-      image: "src/assets/realtimeCollab.png", // Replace with actual image path
+      title: "Personalized Journey Analysis",
+      description: "Customize energy and emissions predictions based on user-specific inputs like vehicle type, route, and driving patterns. This tailored approach ensures accurate and relevant insights, making it easy for users to understand the impact of their travel choices on energy consumption and air quality.",
+      image: "src/assets/F2.png", // Replace with actual image path
     },
     {
-      title: "Seamless Integration",
-      description: "Integrate effortlessly with existing platforms and tools to streamline your workflow and increase efficiency.",
-      image: "src/assets/seamlessInteg.png", // Replace with actual image path
+      title: "Interactive Visual Insights",
+      description: "Experience data-driven decision-making with intuitive dashboards and interactive visualizations. Explore detailed maps, charts, and comparative scenarios to assess how various factors, such as EV adoption or traffic conditions, influence energy use and emissions across the transportation system.",
+      image: "src/assets/F3.png", // Replace with actual image path
     },
   ];
 
