@@ -35,9 +35,9 @@ function Contact() {
             Feel free to reach out to us through any of the following methods:
           </p>
           <ul className="text-gray-600 mb-6">
-            <li>Office Address: 1234 Innovation Drive, Tech City</li>
-            <li>Phone: +1 (555) 012-3456</li>
-            <li>Email: contact@sitedesign.com</li>
+            <li>Office Address: M 162C Kennesaw State University, Marietta Campus</li>
+            <li>Phone: +1 (470)-578-5090</li>
+            <li>Email: FutraLab@kennesaw.edu</li>
           </ul>
           {/* <img
             src="https://via.placeholder.com/400x300"
