@@ -8,8 +8,8 @@ const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="bg-[#030303] px-6 py-4 text-white flex items-center justify-between">
-      <img src="logo.png" alt="Logo" className="h-10 w-auto" />
+    <header className="bg-[#030303] px-6 py-4 text-white flex items-center justify-between ">
+      <img src="logo.png" alt="Logo" className="h-10 w-auto " />
 
       <button
         className="block lg:hidden text-white"
