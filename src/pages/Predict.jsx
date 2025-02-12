@@ -37,32 +37,40 @@ function Predict() {
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="">Select Vehicle Type</option>
-              <option value="Car">Car</option>
-              <option value="Truck">Truck</option>
-              <option value="SUV">SUV</option>
+              <option value="Combination long-haul Truck">Combination long-haul Truck</option>
+              <option value="Combination short-haul Truck">Combination short-haul Truck</option>
+              <option value="Light Commercial Truck">Light Commercial Truck</option>
+              <option value="Motorhome - Recreational Vehicle">Motorhome - Recreational Vehicle</option>
               <option value="Motorcycle">Motorcycle</option>
+              <option value="Other Buses">Other Buses</option>
+              <option value="Passenger Truck">Passenger Truck</option>
+              <option value="Refuse Truck">Refuse Truck</option>
+              <option value="School Bus">School Bus</option>
+              <option value="Single Unit long-haul Truck">Single Unit long-haul Truck</option>
+              <option value="Single Unit short-haul Truck">Single Unit short-haul Truck</option>
+              <option value="Transit Bus">Transit Bus</option>
             </select>
             <select
               name="fuelType"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="">Select Fuel Type</option>
-              <option value="Petrol">Petrol</option>
-              <option value="Diesel">Diesel</option>
-              <option value="Electric">Electric</option>
-              <option value="Hybrid">Hybrid</option>
-              <option value="CNG">CNG</option>
+              <option value="Compressed Natural Gas - CNG">Compressed Natural Gas - CNG</option>
+              <option value="Diesel Fuel">Diesel Fuel</option>
+              <option value="Electricity">Electricity</option>
+              <option value="Ethanol - E-85">Ethanol - E-85</option>
+              <option value="Gasoline">Gasoline</option>
             </select>
             <input
               type="number"
-              name="age"
-              placeholder="Age"
+              name="age(year)"
+              placeholder="Age(Year)"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <input
               type="number"
-              name="trafficSpeed"
-              placeholder="Traffic Speed"
+              name="speed(mph)"
+              placeholder="Speed(MPH)"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <div className="col-span-2">
