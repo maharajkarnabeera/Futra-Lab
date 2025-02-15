@@ -10,7 +10,7 @@ function Home() {
           Welcome to <span className="text-blue-600">Futra Lab</span>
         </h2>
         <p className="text-lg text-gray-600 mb-6">
-          Discover the future with our innovative web solutions.
+         AI-powered predictions for vehicle energy consumption and emissions. Upload your data for precise insights.
         </p>
         <button className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800"
         onClick={() => navigate("/predict")}>
@@ -23,7 +23,7 @@ function Home() {
         <div className="bg-gray-200 p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-semibold mb-2">Explore Our Features</h3>
           <p className="text-gray-600 mb-4">
-            Experience cutting-edge technology and exceptional service.
+            Explore our cutting-edge solutions designed to enhance mobility, safety, and efficiency.
           </p>
           <button className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition"
           onClick={() => navigate("/features")}>
@@ -33,7 +33,7 @@ function Home() {
         <div className="bg-black p-6 rounded-lg shadow-md text-center text-white">
           <h3 className="text-xl font-semibold mb-2">Why Choose Us?</h3>
           <p className="text-gray-300 mb-4">
-            We are committed to delivering excellence and innovation.
+            We innovate to make transportation smarter, safer, and sustainable.
           </p>
           <button className="px-4 py-2 bg-teal-500 rounded hover:bg-teal-600 transition"
            onClick={() => navigate("/about")}>
