@@ -1,19 +1,31 @@
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
-import useAuthStore from '../utilities/authStore';
+// 🛡️ ProtectedRoute.js - Secure Routes Component
+import { Navigate, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAuthStore from "../utilities/authStore";
 
-const ProtectedRoute = ({ children }) => {
-  const { token } = useAuthStore(); // Access token directly from Zustand
+const ProtectedRoute = () => {
+  const { isAuthenticated, refreshAuth, fetchHistory } = useAuthStore();
+  const [loading, setLoading] = useState(true);
 
-  if (!token) {
-    return <Navigate to="/signin" replace />; // Redirect to /signin if no token
-  }
+  useEffect(() => {
+    const verifyAuth = async () => {
+      try {
+        await refreshAuth();
+        await fetchHistory();
+      } catch (err) {
+        console.error("Authorization failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return children;
-};
+    verifyAuth();
+  }, [refreshAuth, fetchHistory]);
 
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
+  if (loading) return <p>Loading...</p>;
+  if (!isAuthenticated) return <Navigate to="/signin" replace />;
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

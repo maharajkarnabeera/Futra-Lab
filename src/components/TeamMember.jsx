@@ -16,11 +16,9 @@ const TeamMember = ({ image, name, position }) => {
 
 // Prop Validation
 TeamMember.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  position: PropTypes.string,
 };
 
 export default TeamMember;
-
-  

@@ -6,7 +6,7 @@ import useAuthStore from "../../utilities/authStore";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { user, clearAuth } = useAuthStore(); // Zustand store to manage auth state
+  const { user, clearAuth } = useAuthStore.getState(); // Zustand store to manage auth state
   const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -39,7 +39,11 @@ const Header = () => {
             </Link>
           </li>
           <li className="py-2 px-4 lg:p-0">
-            <Link to="/about" className="hover:text-gray-300" onClick={closeMenu}>
+            <Link
+              to="/about"
+              className="hover:text-gray-300"
+              onClick={closeMenu}
+            >
               About
             </Link>
           </li>
@@ -70,6 +74,17 @@ const Header = () => {
               Predict
             </Link>
           </li>
+          {user && (
+            <li className="py-2 px-4 lg:p-0">
+              <Link
+                to="/history"
+                className="hover:text-gray-300"
+                onClick={closeMenu}
+              >
+                History
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
 
@@ -80,7 +95,9 @@ const Header = () => {
             onClick={() => setIsProfileMenuOpen((prev) => !prev)}
           >
             <User size={24} className="text-white" />
-            <span className="hidden lg:block">{user.name || "Profile"}</span>
+            <span className="hidden lg:block">
+              {user.firstName + " " + user.lastName || "Profile"}
+            </span>
           </button>
 
           {isProfileMenuOpen && (
