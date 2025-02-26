@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
@@ -11,9 +12,19 @@ import History from "./pages/History";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
+import useAuthStore from "./utilities/authStore";
 
 const App = () => {
+  const { refreshAuth } = useAuthStore();
+  useEffect(() => {
+    const verifyToken = async () => {
+      await refreshAuth();
+    };
+    verifyToken();
+  }, [refreshAuth]);
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
@@ -27,6 +38,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/features" element={<Features />} />
+            <Route path="/rp" element={<ResetPassword />} />
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>

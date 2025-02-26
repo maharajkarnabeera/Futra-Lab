@@ -18,13 +18,19 @@ const authService = {
   },
 
   refreshToken: async () => {
-    await api.post("/token-refresh/"); // Managed via httpOnly cookie; no response body expected
+    const response = await api.post("/token-refresh/");
+    console.log(response);
+    return response.data; // Managed via httpOnly cookie; no response body expected
   },
 
   getHistory: async () => {
     const response = await api.get("/history/");
     console.log(response.data);
     return response.data; // Returns user-specific history
+  },
+
+  logoutUser: async () => {
+    await api.post("/logout/");
   },
 };
 

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
+import api from "../utilities/api";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const {
@@ -11,13 +12,15 @@ const ForgotPassword = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("/api/check-email", {
+      const response = await api.post("/forgot-password/", {
         email: data.email,
       });
-      if (response.data.isRegistered) {
+      console.log(response);
+      if (response.data) {
         setEmail(data.email);
         setIsOtpModalOpen(true);
       } else {
@@ -29,7 +32,15 @@ const ForgotPassword = () => {
     }
   };
 
-  const handleOtpSubmit = (otp) => {
+  const handleOtpSubmit = async (otp) => {
+    const response = await api.post("/validate-otp/", {
+      email: email,
+      otp: otp,
+    });
+
+    if (response.data) {
+      navigate("/rp", { state: { email } });
+    }
     console.log("OTP submitted: ", otp);
     setIsOtpModalOpen(false);
   };

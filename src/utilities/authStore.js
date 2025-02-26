@@ -4,21 +4,36 @@ import authService from "./authService";
 
 const useAuthStore = create((set, get) => ({
   isAuthenticated: false,
+  authLoading: true, // <-- Add loading state
   user: null,
   history: [],
 
   setAuth: (status, user = null) => set({ isAuthenticated: status, user }),
   setHistory: (history) => set({ history }),
-  clearAuth: () => set({ isAuthenticated: false, user: null, history: [] }),
+  clearAuth: () =>
+    set({
+      isAuthenticated: false,
+      user: null,
+      history: [],
+      authLoading: false,
+    }),
 
   refreshAuth: async () => {
     try {
-      await authService.refreshToken();
-      const { user } = get();
-      set({ isAuthenticated: !!user }); // Maintain authentication if user info exists
+      const response = await authService.refreshToken();
+      set({
+        isAuthenticated: true,
+        user: {
+          firstName: response.user.first_name,
+          lastName: response.user.last_name,
+        },
+        authLoading: false, // <-- Done loading
+      });
     } catch (err) {
       console.error("Token refresh failed:", err);
       get().clearAuth();
+      set({ authLoading: false });
+      // <-- Done loading even if error occurs
     }
   },
 
@@ -48,8 +63,14 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
-  logoutUser: () => {
-    get().clearAuth(); // Client-side logout only
+  logoutUser: async () => {
+    try {
+      await authService.logoutUser();
+    } catch (err) {
+      console.error("Logout failed:", err);
+    } finally {
+      get().clearAuth();
+    }
   },
 }));
 

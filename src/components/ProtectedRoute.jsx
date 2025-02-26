@@ -1,31 +1,16 @@
-// 🛡️ ProtectedRoute.js - Secure Routes Component
+// 🛡️ ProtectedRoute.js
 import { Navigate, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
 import useAuthStore from "../utilities/authStore";
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, refreshAuth, fetchHistory } = useAuthStore();
-  const [loading, setLoading] = useState(true);
+  const { isAuthenticated, authLoading } = useAuthStore();
 
-  useEffect(() => {
-    const verifyAuth = async () => {
-      try {
-        await refreshAuth();
-        await fetchHistory();
-      } catch (err) {
-        console.error("Authorization failed:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (authLoading) {
+    // Optionally, render a loading spinner or placeholder here
+    return <div>Loading...</div>;
+  }
 
-    verifyAuth();
-  }, [refreshAuth, fetchHistory]);
-
-  if (loading) return <p>Loading...</p>;
-  if (!isAuthenticated) return <Navigate to="/signin" replace />;
-
-  return <Outlet />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/signin" />;
 };
 
 export default ProtectedRoute;

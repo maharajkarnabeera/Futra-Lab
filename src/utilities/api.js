@@ -20,6 +20,7 @@ api.interceptors.response.use(
         return api(originalRequest); // Retry request after token refresh
       } catch {
         useAuthStore.getState().clearAuth();
+        return Promise.reject(error);
       }
     }
 

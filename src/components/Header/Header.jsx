@@ -6,13 +6,15 @@ import useAuthStore from "../../utilities/authStore";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { user, clearAuth } = useAuthStore.getState(); // Zustand store to manage auth state
+  // Subscribe to state changes by using the hook directly
+  const { user, clearAuth, logoutUser } = useAuthStore();
   const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  const handleLogout = () => {
-    clearAuth(); // Clear user and token from Zustand
+  const handleLogout = async () => {
+    clearAuth();
+    await logoutUser(); // Clear user and token from Zustand
     navigate("/signin"); // Redirect to SignIn page
   };
 
