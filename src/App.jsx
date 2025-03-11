@@ -39,10 +39,10 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/features" element={<Features />} />
             <Route path="/rp" element={<ResetPassword />} />
-            <Route path="/predict" element={<Predict />} />
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
+              <Route path="/predict" element={<Predict />} />
               <Route path="/history" element={<History />} />
             </Route>
 
