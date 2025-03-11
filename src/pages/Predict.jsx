@@ -17,6 +17,7 @@ function Predict() {
     fuelType: "",
     age: "",
     trafficSpeed: "",
+    city: "",
   });
 
   const handleChange = (e) => {
@@ -36,6 +37,7 @@ function Predict() {
           Speed: inputData.trafficSpeed,
           "Vehicle Type": inputData.vehicleType,
           "Fuel Type": inputData.fuelType,
+          City: inputData.city,
         },
       };
       const response = await api.post("/predict/", payload);
@@ -62,6 +64,15 @@ function Predict() {
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
+            <select
+              name="city"
+              value={inputData.city}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="">Select City</option>
+              <option value="Georgia">Georgia</option>
+            </select>
             <select
               name="vehicleType"
               value={inputData.vehicleType}

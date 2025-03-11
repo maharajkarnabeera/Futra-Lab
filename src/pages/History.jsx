@@ -41,6 +41,9 @@ function History() {
                   {entry.fuel_type}
                 </p>
                 <p>
+                  <span className="font-medium">City:</span> {entry.city}
+                </p>
+                <p>
                   <span className="font-medium">Age:</span> {entry.age}
                 </p>
                 <p>
