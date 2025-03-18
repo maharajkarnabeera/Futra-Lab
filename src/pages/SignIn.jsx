@@ -2,6 +2,8 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../utilities/authStore";
+import useLoadingStore from "../utilities/loadingStore"; 
+
 
 const SignIn = () => {
   const {
@@ -10,15 +12,19 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
   const { loginUser } = useAuthStore();
+  const { showLoader, hideLoader } = useLoadingStore();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
+      showLoader();
       console.log(data);
       await loginUser(data);
       navigate("/"); // Redirect to home or dashboard after successful login
     } catch {
       alert("Login failed. Please check your credentials.");
+    } finally {
+      hideLoader();
     }
   };
 

@@ -1,12 +1,22 @@
 import { useEffect } from "react";
 import useAuthStore from "../utilities/authStore";
+import useLoadingStore from "../utilities/loadingStore";
 
 function History() {
   const { history, fetchHistory } = useAuthStore();
-
+  const { showLoader, hideLoader } = useLoadingStore();
   useEffect(() => {
-    fetchHistory();
-  }, [fetchHistory]);
+    const loadHistory = async () => {
+      showLoader();
+      try {
+        await fetchHistory();
+      } finally {
+        hideLoader();
+      }
+    };
+  
+    loadHistory();
+  }, [fetchHistory, showLoader, hideLoader]);
 
   if (!history.length) {
     return (

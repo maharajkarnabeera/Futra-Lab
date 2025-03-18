@@ -1,9 +1,15 @@
 import { useState } from "react";
 import api from "../utilities/api";
+import useLoadingStore from "../utilities/loadingStore"; 
+import usePredictionStore from "../utilities/usePredictionStore";
+import PredictionCharts from "./PredictionCharts";
 
 function Predict() {
   const [isPredictClicked, setIsPredictClicked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { showLoader, hideLoader } = useLoadingStore();
+  const { setPrediction } = usePredictionStore(); 
+
   const [error, setError] = useState("");
   const [output, setOutput] = useState({
     gaCo2: "",
@@ -28,6 +34,7 @@ function Predict() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsPredictClicked(true);
+    showLoader();
     setLoading(true);
     setError(""); // reset error state
     try {
@@ -42,16 +49,18 @@ function Predict() {
       };
       const response = await api.post("/predict/", payload);
       console.log("API response:", response.data);
+      setPrediction(response.data);
       setOutput(response.data);
     } catch (error) {
       console.error("Error during prediction:", error);
       setError("Prediction failed. Please try again.");
     } finally {
       setLoading(false);
+      hideLoader();
+      console.log("Submitted data:", inputData);
     }
-    console.log("Submitted data:", inputData);
   };
-
+  
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <div className="container mx-auto space-y-8">
@@ -150,17 +159,15 @@ function Predict() {
             </div>
           </form>
         </div>
-
-        {/* Results Section */}
         {isPredictClicked && (
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4">Results</h2>
+          <>
             {loading ? (
               <p className="text-center text-xl">Loading...</p>
             ) : error ? (
               <p className="text-center text-xl text-red-600">{error}</p>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">CO2</p>
                   <h3 className="text-xl font-bold">{output.gaCo2}</h3>
@@ -188,8 +195,14 @@ function Predict() {
                   </h3>
                 </div>
               </div>
+               
+                <div className="bg-white p-4 rounded-lg shadow-md">
+                  <h2 className="text-xl font-bold mb-4 text-center">Visual Insights</h2>
+                  <PredictionCharts />
+                </div>
+              </>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>

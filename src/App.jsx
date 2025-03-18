@@ -15,8 +15,13 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import useAuthStore from "./utilities/authStore";
+import PaginationData from "./pages/PaginationData";
+import LoadingOverlay from "./pages/LoadingOverlay";
+import useLoadingStore from "./utilities/loadingStore";
 
 const App = () => {
+
+  const { isLoading } = useLoadingStore();
   const { refreshAuth } = useAuthStore();
   useEffect(() => {
     const verifyToken = async () => {
@@ -27,6 +32,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
+     <LoadingOverlay isLoading={isLoading} />
+    <div className="flex flex-col min-h-screen relative">
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow px-4">
@@ -39,7 +46,9 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/features" element={<Features />} />
             <Route path="/rp" element={<ResetPassword />} />
+            <Route path="/pagination" element={<PaginationData />} />
 
+            
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/predict" element={<Predict />} />
@@ -51,6 +60,7 @@ const App = () => {
           </Routes>
         </main>
         <Footer />
+      </div>
       </div>
     </BrowserRouter>
   );

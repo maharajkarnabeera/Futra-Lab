@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X, User } from "lucide-react";
 import useAuthStore from "../../utilities/authStore";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  // Subscribe to state changes by using the hook directly
   const { user, clearAuth, logoutUser } = useAuthStore();
   const navigate = useNavigate();
 
@@ -14,8 +13,8 @@ const Header = () => {
 
   const handleLogout = async () => {
     clearAuth();
-    await logoutUser(); // Clear user and token from Zustand
-    navigate("/signin"); // Redirect to SignIn page
+    await logoutUser();
+    navigate("/signin");
   };
 
   return (
@@ -35,61 +34,104 @@ const Header = () => {
         } absolute top-16 left-0 w-full bg-[#030303] lg:static lg:block lg:w-auto`}
       >
         <ul className="flex flex-col lg:flex-row lg:items-center lg:space-x-6">
+          {/* Updated from Link to NavLink */}
           <li className="py-2 px-4 lg:p-0">
-            <Link to="/" className="hover:text-gray-300" onClick={closeMenu}>
+            <NavLink
+              to="/"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold" // ACTIVE STATE color
+                  : "hover:text-gray-300"
+              }
+            >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li className="py-2 px-4 lg:p-0">
-            <Link
+            <NavLink
               to="/about"
-              className="hover:text-gray-300"
               onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold"
+                  : "hover:text-gray-300"
+              }
             >
               About
-            </Link>
+            </NavLink>
           </li>
           <li className="py-2 px-4 lg:p-0">
-            <Link
+            <NavLink
               to="/contact"
-              className="hover:text-gray-300"
               onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold"
+                  : "hover:text-gray-300"
+              }
             >
               Contact
-            </Link>
+            </NavLink>
           </li>
           <li className="py-2 px-4 lg:p-0">
-            <Link
+            <NavLink
               to="/features"
-              className="hover:text-gray-300"
               onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold"
+                  : "hover:text-gray-300"
+              }
             >
               Features
-            </Link>
+            </NavLink>
           </li>
           <li className="py-2 px-4 lg:p-0">
-            <Link
+            <NavLink
               to="/predict"
-              className="hover:text-gray-300"
               onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold"
+                  : "hover:text-gray-300"
+              }
             >
               Predict
-            </Link>
+            </NavLink>
           </li>
           {user && (
             <li className="py-2 px-4 lg:p-0">
-              <Link
+              <NavLink
                 to="/history"
-                className="hover:text-gray-300"
                 onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-yellow-400 font-semibold"
+                    : "hover:text-gray-300"
+                }
               >
-                History
-              </Link>
+                User Submitted Results
+              </NavLink>
             </li>
           )}
+          <li className="py-2 px-4 lg:p-0">
+            <NavLink
+              to="/pagination"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-semibold"
+                  : "hover:text-gray-300"
+              }
+            >
+              Model Insights
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
+      {/* Profile / Sign In */}
       {user ? (
         <div className="relative">
           <button
@@ -101,7 +143,6 @@ const Header = () => {
               {user.firstName + " " + user.lastName || "Profile"}
             </span>
           </button>
-
           {isProfileMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
               <button
@@ -114,12 +155,16 @@ const Header = () => {
           )}
         </div>
       ) : (
-        <Link
+        <NavLink
           to="/signin"
-          className="text-sm text-white hover:underline lg:ml-4"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-400 font-semibold text-sm lg:ml-4"
+              : "text-white hover:underline text-sm lg:ml-4"
+          }
         >
           Sign In
-        </Link>
+        </NavLink>
       )}
     </header>
   );

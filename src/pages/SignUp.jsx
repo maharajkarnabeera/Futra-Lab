@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import authService from "../utilities/authService";
+import useLoadingStore from "../utilities/loadingStore";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const SignUp = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const { showLoader, hideLoader } = useLoadingStore();
 
   const onSubmit = async (data) => {
     const payload = {
@@ -25,6 +27,7 @@ const SignUp = () => {
     };
 
     try {
+      showLoader();
       await authService.register(payload);
       alert("Successful sign up! Please sign in.");
       navigate("/signin");
@@ -39,6 +42,8 @@ const SignUp = () => {
         console.error("Registration failed:", error);
         alert("Registration failed. Please try again.");
       }
+    } finally {
+      hideLoader();
     }
   };
 
