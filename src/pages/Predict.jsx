@@ -49,7 +49,8 @@ function Predict() {
       };
       const response = await api.post("/predict/", payload);
       console.log("API response:", response.data);
-      setPrediction(response.data);
+      const extendedData = { ...response.data, "speed": inputData.trafficSpeed };
+      setPrediction(extendedData);
       setOutput(response.data);
     } catch (error) {
       console.error("Error during prediction:", error);
