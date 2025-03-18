@@ -1,4 +1,4 @@
-import { Card, CardContent , Box, LinearProgress} from "@mui/material";
+import { Card, CardContent ,Typography, Box, LinearProgress} from "@mui/material";
 import usePredictionStore from "../utilities/usePredictionStore";
 
 //const COLORS = ["#FF0000", "#00FF00", "#0000FF", "#FFD700", "#FF8C00"];
@@ -16,7 +16,10 @@ const PredictionCharts = () => {
       {/* CO2 - RED */}
       <Card>
         <CardContent className="flex flex-col items-center">
-          <h3 className="mb-2 font-semibold">CO₂ Emissions</h3>
+        <Typography variant="h6" className="mb-2 font-semibold flex items-center gap-2">
+            CO₂ Emissions
+            <span className="text-sm text-gray-500 font-normal">(Speed: {prediction.speed} mph)</span>
+        </Typography>
           <Box sx={{ width: '100%' }}>
             <LinearProgress variant="determinate" value={normalize(prediction.gaCo2, 0, 8456.64)} sx={{ height: 10, borderRadius: 5, '& .MuiLinearProgress-bar': { backgroundColor: '#ff0000' } }} />
           </Box>
@@ -27,7 +30,11 @@ const PredictionCharts = () => {
       {/* Energy Rate - BLUE */}
       <Card>
         <CardContent className="flex flex-col items-center">
-          <h3 className="mb-2 font-semibold">Energy Rate</h3>
+          {/* <h3 className="mb-2 font-semibold">Energy Rate</h3> */}
+        <Typography variant="h6" className="mb-2 font-semibold flex items-center gap-2">
+          Energy Rate
+            <span className="text-sm text-gray-500 font-normal">(Speed: {prediction.speed} mph)</span>
+        </Typography>
           <Box sx={{ width: '100%' }}>
             <LinearProgress variant="determinate" value={normalize(prediction.gaTotalEnergyRate, 0, 143251.93)} sx={{ height: 10, borderRadius: 5, '& .MuiLinearProgress-bar': { backgroundColor: '#0070c0' } }} />
           </Box>
@@ -38,7 +45,11 @@ const PredictionCharts = () => {
       {/* NOx - GREEN */}
       <Card>
         <CardContent className="flex flex-col items-center">
-          <h3 className="mb-2 font-semibold">NOx</h3>
+          {/* <h3 className="mb-2 font-semibold">NOx</h3> */}
+          <Typography variant="h6" className="mb-2 font-semibold flex items-center gap-2">
+          NOx
+            <span className="text-sm text-gray-500 font-normal">(Speed: {prediction.speed} mph)</span>
+          </Typography>
           <Box sx={{ width: '100%' }}>
             <LinearProgress variant="determinate" value={normalize(prediction.gaNOx, 0, 169.52)} sx={{ height: 10, borderRadius: 5, '& .MuiLinearProgress-bar': { backgroundColor: '#00b050' } }} />
           </Box>
@@ -49,7 +60,11 @@ const PredictionCharts = () => {
       {/* PM2.5 Brake Wear - PURPLE */}
       <Card>
         <CardContent className="flex flex-col items-center">
-          <h3 className="mb-2 font-semibold">PM2.5 Brake Wear</h3>
+          {/* <h3 className="mb-2 font-semibold">PM2.5 Brake Wear</h3> */}
+          <Typography variant="h6" className="mb-2 font-semibold flex items-center gap-2">
+          PM2.5 Brake Wear
+            <span className="text-sm text-gray-500 font-normal">(Speed: {prediction.speed} mph)</span>
+          </Typography>
           <Box sx={{ width: '100%' }}>
             <LinearProgress variant="determinate" value={normalize(parseFloat(prediction["gaPM2.5BrakeWear"]), 0, 0.35)} sx={{ height: 10, borderRadius: 5, '& .MuiLinearProgress-bar': { backgroundColor: '#7030a0' } }} />
           </Box>
@@ -60,7 +75,11 @@ const PredictionCharts = () => {
       {/* PM2.5 Tire Wear - ORANGE */}
       <Card>
         <CardContent className="flex flex-col items-center">
-          <h3 className="mb-2 font-semibold">PM2.5 Tire Wear</h3>
+          {/* <h3 className="mb-2 font-semibold">PM2.5 Tire Wear</h3> */}
+          <Typography variant="h6" className="mb-2 font-semibold flex items-center gap-2">
+          PM2.5 Tire Wear
+            <span className="text-sm text-gray-500 font-normal">(Speed: {prediction.speed} mph)</span>
+          </Typography>
           <Box sx={{ width: '100%' }}>
             <LinearProgress variant="determinate" value={normalize(parseFloat(prediction["gaPM2.5TireWear"]), 0, 0.0095)} sx={{ height: 10, borderRadius: 5, '& .MuiLinearProgress-bar': { backgroundColor: '#ed7d31' } }} />
           </Box>

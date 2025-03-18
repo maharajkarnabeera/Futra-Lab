@@ -7,6 +7,7 @@ const usePredictionStore = create((set) => ({
     "gaNOx": 0,
     "gaPM2.5BrakeWear": 0,
     "gaPM2.5TireWear": 0,
+    "speed": 0
   },
 
   setPrediction: (newData) =>
@@ -22,6 +23,7 @@ const usePredictionStore = create((set) => ({
         "gaNOx": 0,
         "gaPM2.5BrakeWear": 0,
         "gaPM2.5TireWear": 0,
+        "speed": 0
       },
     }),
 }));
