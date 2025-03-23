@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ag-grid-enterprise/filter-tool-panel": "^32.3.4",
+    "@ag-grid-enterprise/server-side-row-model": "^32.3.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.8",
     "@tailwindcss/vite": "^4.0.0",
-    "ag-grid-community": "^33.1.1",
-    "ag-grid-react": "^33.1.1",
+    "ag-grid-community": "^32.3.4",
+    "ag-grid-enterprise": "^32.3.4",
+    "ag-grid-react": "^32.3.4",
     "axios": "^1.7.9",
     "emailjs-com": "^3.2.0",
     "lucide-react": "^0.474.0",
