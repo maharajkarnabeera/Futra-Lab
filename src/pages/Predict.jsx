@@ -30,6 +30,11 @@ function Predict() {
     const { name, value } = e.target;
     setInputData((prev) => ({ ...prev, [name]: value }));
   };
+  const isFormValid = inputData.vehicleType && 
+  inputData.fuelType && inputData.age 
+  && inputData.trafficSpeed 
+  && inputData.city;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -153,7 +158,10 @@ function Predict() {
             <div className="col-span-2">
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition"
+                disabled={!isFormValid}
+                className={`w-full px-4 py-2 text-white rounded transition ${
+                  isFormValid ? "bg-black hover:bg-gray-800" : "bg-gray-400 cursor-not-allowed"
+                }`}
               >
                 Predict
               </button>
@@ -168,31 +176,38 @@ function Predict() {
               <p className="text-center text-xl text-red-600">{error}</p>
             ) : (
               <>
+                <div className="mb-6 text-left pl-4">
+                  <h2 className="text-3xl font-extrabold text-gray-800">Results</h2>
+                  <p className="text-gray-500 mt-1 text-sm italic">
+                      Here&apos;s what we found based on your vehicle and traffic data.
+                  </p>
+                  <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mt-2 rounded"></div>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">CO2</p>
-                  <h3 className="text-xl font-bold">{output.gaCo2}</h3>
+                  <h3 className="text-xl font-bold">{Number(output.gaCo2).toFixed(4)}</h3>
                 </div>
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">NOx (gr/mile)</p>
-                  <h3 className="text-xl font-bold">{output.gaNOx}</h3>
+                  <h3 className="text-xl font-bold">{Number(output.gaNOx).toFixed(4)}</h3>
                 </div>
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">PM2.5 (T)</p>
                   <h3 className="text-xl font-bold">
-                    {output["gaPM2.5TireWear"]}
+                    {Number(output["gaPM2.5TireWear"]).toFixed(4)}
                   </h3>
                 </div>
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">PM2.5 (B)</p>
                   <h3 className="text-xl font-bold">
-                    {output["gaPM2.5BrakeWear"]}
+                    {Number(output["gaPM2.5BrakeWear"]).toFixed(4)}
                   </h3>
                 </div>
                 <div className="bg-gray-100 p-4 rounded shadow-sm">
                   <p className="text-gray-600">Energy Consumption (KJ/mile)</p>
                   <h3 className="text-xl font-bold">
-                    {output.gaTotalEnergyRate}
+                    {Number(output.gaTotalEnergyRate).toFixed(4)}
                   </h3>
                 </div>
               </div>
