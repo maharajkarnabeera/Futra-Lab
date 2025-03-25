@@ -9,4 +9,51 @@
       transform: rotate(360deg);
     }
   }
-  
+  /* Make header more appealing */
+/* 🔹 Custom AG Grid Styling */
+.ag-theme-alpine.custom-ag {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Header Styling */
+.ag-theme-alpine.custom-ag .ag-header {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ag-theme-alpine.custom-ag .ag-header-cell-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+  padding: 10px 8px;
+}
+
+/* Cells */
+.ag-theme-alpine.custom-ag .ag-cell {
+  padding: 10px 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* Hover Effect */
+.ag-theme-alpine.custom-ag .ag-row-hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Column Borders */
+.ag-theme-alpine.custom-ag .ag-cell, 
+.ag-theme-alpine.custom-ag .ag-header-cell {
+  border-right: 1px solid #e5e7eb !important;
+}
+
+/* Remove default border */
+.ag-theme-alpine.custom-ag .ag-root-wrapper {
+  border: none !important;
+}
+
+/* Resize handles */
+.ag-theme-alpine.custom-ag .ag-header-cell-resize {
+  background-color: #cbd5e1;
+}

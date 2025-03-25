@@ -100,7 +100,7 @@ function PaginationData() {
       <hr className="my-10" />
       <h2 className="text-2xl font-semibold mb-4">🗂 Dataset Used (23,000+ records)</h2>
       <p className="text-gray-600 mb-4">View the raw data used for training and testing the model. Records are paginated for easy navigation.</p>
-      <div className="ag-theme-alpine" style={{ height: "500px", width: "100%" }}>
+      <div className="ag-theme-alpine  custom-ag" style={{ height: "500px", width: "100%" }}>
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
