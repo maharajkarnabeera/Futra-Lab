@@ -5,6 +5,8 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import api from "../utilities/api";
 import Pagination from '@mui/material/Pagination';
+import { debounce } from "lodash";
+
 
 function PaginationData() {
   const gridRef = useRef();
@@ -17,6 +19,9 @@ function PaginationData() {
   const [rowData, setRowData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [noData, setNoData] = useState(false);
+
+  const debouncedFilterRef = useRef();
+
 
   useEffect(() => {
     api.get("/distinct-values?column=STATE").then((res) => setStateOptions(res.data.values));
@@ -33,12 +38,13 @@ function PaginationData() {
     if (filters["Vehicle Type"]?.length > 0) apiFilters["VehicleType[]"] = filters["Vehicle Type"];
 
     api.get("/pagination-emissions", { params: { page: currentPage, ...apiFilters } }).then((res) => {
-      if (res.data.data.length === 0) {
-        setNoData(true);
-      }
       setRowData(res.data.data);
       setTotalPages(res.data.total_pages);
       setLoading(false);
+      if (res.data.data.length === 0) {
+        setNoData(true);
+      }
+      
     });
   }, [filters]);
 
@@ -46,14 +52,19 @@ function PaginationData() {
     fetchData(page);
   }, [filters, fetchData, page]);
 
-  const handleFilterChange = (model) => {
-    const updatedFilters = {};
-    if (model["STATE"]?.values) updatedFilters.STATE = model["STATE"].values;
-    if (model["Fuel Type"]?.values) updatedFilters["Fuel Type"] = model["Fuel Type"].values;
-    if (model["Vehicle Type"]?.values) updatedFilters["Vehicle Type"] = model["Vehicle Type"].values;
-    setFilters(updatedFilters);
-    setPage(1);
-  };
+
+    useEffect(() => {
+      debouncedFilterRef.current = debounce((model) => {
+        const updatedFilters = {};
+        if (model["STATE"]?.values) updatedFilters.STATE = model["STATE"].values;
+        if (model["Fuel Type"]?.values) updatedFilters["Fuel Type"] = model["Fuel Type"].values;
+        if (model["Vehicle Type"]?.values) updatedFilters["Vehicle Type"] = model["Vehicle Type"].values;
+        setFilters(updatedFilters);
+        setPage(1);
+      }, 2000);
+    }, []); // only once on mount
+
+  
 
   const onFirstDataRendered = (params) => {
     // Ensure that the grid auto sizes columns when the data is loaded.
@@ -97,9 +108,11 @@ function PaginationData() {
           animateRows={true}
           pagination={false}
           floatingFilter={true}
-          onFilterChanged={(e) => handleFilterChange(e.api.getFilterModel())}
+          onFilterChanged={(e) => debouncedFilterRef.current(e.api.getFilterModel())}
           onFirstDataRendered={onFirstDataRendered}
+          loading={loading}
         />
+
       </div>
       <div className="flex justify-center mt-4">
       {!loading && !noData && ( // Only render pagination when not loading
